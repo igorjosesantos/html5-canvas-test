@@ -1,0 +1,96 @@
+<html>
+    <script type='text/javascript'>
+    var canvas, context, isDrawing = false,
+        prevX = 0,
+        currX = 0,
+        prevY = 0,
+        currY = 0;
+
+    var penColor = 'black',
+        penSize = 2;
+    
+    const init = () => {
+        canvas = document.getElementById('can');
+        context = canvas.getContext('2d');
+        w = canvas.width;
+        h = canvas.height;
+    
+        window.addEventListener('mousedown', event => {
+            window.isMouseDown = true
+        }, false);
+        
+        window.addEventListener('mouseup', event => {
+            window.isMouseDown = false
+        }, false);
+
+        canvas.addEventListener('mouseenter', event => drawInPointerPosition('enter', event), false);
+        canvas.addEventListener('mousedown', event => drawInPointerPosition('press', event), false);
+        canvas.addEventListener('mousemove', event => drawInPointerPosition('move', event), false);
+    }
+    
+    const setColor = color => {
+        penColor = color
+        penSize = penColor === 'white'? 32 : 4;
+    }
+    
+    const draw = (type = 'dot') => {
+        if (type === 'dot') {
+            context.beginPath();
+            context.fillStyle = penColor;
+            context.fillRect(currX, currY, penSize, penSize);
+            context.stroke();
+            context.closePath();
+        }
+        if (type === 'line') {
+            context.beginPath();
+            context.moveTo(prevX, prevY);
+            context.lineTo(currX, currY);
+            context.strokeStyle = penColor;
+            context.fillStyle = penColor;
+            context.lineWidth = penSize;
+            context.stroke();
+            context.closePath();
+        }
+    }
+    
+    const erase = () => {
+        context.clearRect(0, 0, w, h);
+    }
+    
+    const save = () => {
+        console.log(canvas.toDataURL());
+    }
+    
+    const drawInPointerPosition = (action, event) => {
+        prevX = currX;
+        prevY = currY;
+        currX = event.clientX - canvas.offsetLeft;
+        currY = event.clientY - canvas.offsetTop;
+
+        
+        if (action === 'press') {
+            draw('dot');
+        }
+
+        if (action === 'enter' || action === 'move') {
+            if (window.isMouseDown) {
+                draw('line');
+            }
+        }
+    }
+    </script>
+    
+    <body onload='init()'>
+        <canvas id='can' width='400' height='400' style='position:absolute;top:10%;left:10%;border:2px solid;'></canvas>
+        <div style='position:absolute;top:12%;left:43%;'>Choose Color</div>
+        <div style='position:absolute;top:15%;left:46%;width:10px;height:10px;background:blue;' id='blue' onclick='setColor(this.id)'></div>
+        <div style='position:absolute;top:15%;left:47%;width:10px;height:10px;background:red;' id='red' onclick='setColor(this.id)'></div>
+        <div style='position:absolute;top:17%;left:47%;width:10px;height:10px;background:black;' id='black' onclick='setColor(this.id)'></div>
+
+        <div style='position:absolute;top:20%;left:43%;'>Eraser</div>
+        <div style='position:absolute;top:22%;left:45%;width:15px;height:15px;background:white;border:2px solid;' id='white' onclick='setColor(this.id)'></div>
+
+        <input type='button' value='save' id='btn' size='30' onclick='save()' style='position:absolute;top:55%;left:10%;'>
+        <input type='button' value='clear' id='clr' size='23' onclick='erase()' style='position:absolute;top:55%;left:15%;'>
+    </body>
+</html>

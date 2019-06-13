@@ -1,0 +1,69 @@
+html, body {
+    text-align: center;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+#pdf-viewer {
+    position: absolute;
+    overflow: auto;
+    width: 100%;
+    bottom: 0;
+    top: 35px;
+}
+
+#pdf-controls {
+    padding: 5px 0;
+    position: fixed;
+    overflow: auto;
+    width: 100%;
+    top: 0;
+}
+
+#pdf-annotation-layer { 
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    opacity: 0.2;
+    line-height: 1.0;
+}
+
+#pdf-annotation-layer > section {
+    color: transparent;
+    position: absolute;
+    white-space: pre;
+    cursor: text;
+    transform-origin: 0% 0%;
+}
+
+#pdf-annotation-layer > .linkAnnotation > a {
+    position: absolute;
+    font-size: 1em;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#pdf-text-layer { 
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    opacity: 0.2;
+    line-height: 1.0;
+}
+
+#pdf-text-layer > div {
+    color: transparent;
+    position: absolute;
+    white-space: pre;
+    cursor: text;
+    transform-origin: 0% 0%;
+}
