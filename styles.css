@@ -5,20 +5,34 @@ html, body {
     margin: 0;
 }
 
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+canvas:first-of-type {
+    z-index: 1;
+}
+canvas:last-of-type {
+    z-index: 0;
+}
+
 #pdf-viewer {
     position: absolute;
-    overflow: auto;
-    width: 100%;
+    top: 32px;
+    left: 0;
     bottom: 0;
-    top: 35px;
+    width: 100%;
+    overflow: auto;
 }
 
 #pdf-controls {
     padding: 5px 0;
+    overflow: hidden;
     position: fixed;
-    overflow: auto;
     width: 100%;
     top: 0;
+    border-bottom: solid 1px gray;
 }
 
 #pdf-annotation-layer { 

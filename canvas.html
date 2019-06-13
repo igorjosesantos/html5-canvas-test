@@ -1,19 +1,17 @@
 <html>
     <script type='text/javascript'>
-    var canvas, context, isDrawing = false,
+    var canvas, context,
         prevX = 0,
         currX = 0,
         prevY = 0,
         currY = 0;
 
     var penColor = 'black',
-        penSize = 2;
+        penSize = 4;
     
     const init = () => {
         canvas = document.getElementById('can');
         context = canvas.getContext('2d');
-        w = canvas.width;
-        h = canvas.height;
     
         window.addEventListener('mousedown', event => {
             window.isMouseDown = true
@@ -82,13 +80,15 @@
     
     <body onload='init()'>
         <canvas id='can' width='400' height='400' style='position:absolute;top:10%;left:10%;border:2px solid;'></canvas>
-        <div style='position:absolute;top:12%;left:43%;'>Choose Color</div>
-        <div style='position:absolute;top:15%;left:46%;width:10px;height:10px;background:blue;' id='blue' onclick='setColor(this.id)'></div>
-        <div style='position:absolute;top:15%;left:47%;width:10px;height:10px;background:red;' id='red' onclick='setColor(this.id)'></div>
-        <div style='position:absolute;top:17%;left:47%;width:10px;height:10px;background:black;' id='black' onclick='setColor(this.id)'></div>
+        
+        <div>Choose Color</div>
 
-        <div style='position:absolute;top:20%;left:43%;'>Eraser</div>
-        <div style='position:absolute;top:22%;left:45%;width:15px;height:15px;background:white;border:2px solid;' id='white' onclick='setColor(this.id)'></div>
+        <div style='width:10px;height:10px;background:red;' id='red' onclick='setColor(this.id)'></div>
+        <div style='width:10px;height:10px;background:blue;' id='blue' onclick='setColor(this.id)'></div>
+        <div style='width:10px;height:10px;background:black;' id='black' onclick='setColor(this.id)'></div>
+
+        <div>Eraser</div>
+        <div style='width:15px;height:15px;background:white;border:2px solid;' id='white' onclick='setColor(this.id)'></div>
 
         <input type='button' value='save' id='btn' size='30' onclick='save()' style='position:absolute;top:55%;left:10%;'>
         <input type='button' value='clear' id='clr' size='23' onclick='erase()' style='position:absolute;top:55%;left:15%;'>

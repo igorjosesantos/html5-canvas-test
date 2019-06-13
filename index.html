@@ -7,7 +7,7 @@
     <title>PDF Annotations - POC</title>
     <link rel="stylesheet" href="./styles.css">
 </head>
-<body>
+<body onload="init()">
     <div id="pdf-controls">
         <button onclick="loadPrevPage()">prev page</button>
         <button onclick="loadNextPage()">next page</button>
@@ -17,15 +17,21 @@
         <button onclick="resetZoom()">reset</button>
         |
         <button onclick="rotateClockwise()">rotate clockwise</button>
+        |
+        <button style='height:15px;background:white;border:2px solid black;' onclick='setColor("white")'></button>
+        <button style='height:15px;background:red;border:2px solid transparent;' onclick='setColor("red")'></button>
+        <button style='height:15px;background:blue;border:2px solid transparent;' onclick='setColor("blue")'></button>
+        <button style='height:15px;background:black;border:2px solid transparent;' onclick='setColor("black")'></button>
+        <!-- | -->
+        <!-- <button onclick='save()'>save</button> -->
+        <!-- <button onclick='erase()'>clear</button> -->
         <span id="progress"></span>
-        <hr />
     </div>
    
             
     <div id="pdf-viewer">
-        <canvas id="pdf-canvas"></canvas>
-        <div id="pdf-text-layer"></div>
-        <div id="pdf-annotation-layer"></div>
+        <canvas id="pdf-annotations"></canvas>
+        <canvas id="pdf-render"></canvas>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2/build/pdf.min.js"></script>
